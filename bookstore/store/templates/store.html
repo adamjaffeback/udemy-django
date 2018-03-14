@@ -11,7 +11,7 @@
     {{ request.user.first_name }}
     {% else %}
     {{ request.user.username }}
-    {% endif %}!
+    {% endif %}! <a href="{% url 'auth_logout' %}">Log Out</a>
   </h4>
 {% else %}
 
