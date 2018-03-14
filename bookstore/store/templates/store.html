@@ -5,6 +5,18 @@
   <title></title>
 </head>
 <body>
-  Welcome to the mystery books store. There are {{ count }} books in stock.
+{% if request.user.is_authenticated %}
+  <h4>
+    Welcome, {% if request.user.first_name %}
+    {{ request.user.first_name }}
+    {% else %}
+    {{ request.user.username }}
+    {% endif %}!
+  </h4>
+{% else %}
+
+{% endif %}
+
+Welcome to the mystery books store. There are {{ count }} books in stock.
 </body>
 </html>
