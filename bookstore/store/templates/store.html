@@ -14,7 +14,9 @@
     {% endif %}! <a href="{% url 'auth_logout' %}">Log Out</a>
   </h4>
 {% else %}
-
+  <h4>
+    Welcome, mystery person! Would you like to <a href="{% url 'auth_login' %}">log in</a>?
+  </h4>
 {% endif %}
 
 Welcome to the mystery books store. There are {{ count }} books in stock.
