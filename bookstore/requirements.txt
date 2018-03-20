@@ -1,2 +1,15 @@
+certifi==2018.1.18
+chardet==3.0.4
 Django==1.8
+django-bootstrap-themes==3.1.2
+django-bootstrap3==5.4.0
 django-registration-redux==1.1
+idna==2.6
+oauthlib==2.0.6
+PyJWT==1.6.0
+python-openid==2.2.5
+python-social-auth==0.2.7
+requests==2.18.4
+requests-oauthlib==0.8.0
+six==1.11.0
+urllib3==1.22
