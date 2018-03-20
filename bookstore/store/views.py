@@ -8,6 +8,7 @@ def store(request):
   count = Book.objects.all().count()
   context = {
     'count': count,
+    'page': 'welcome to mystery books!'
   }
 
   request.session['location'] = "unknown"
