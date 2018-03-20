@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Welcome to Mystery Books!{% endblock %}</title>
 </head>
-<body>
+<body background="{% static 'base/img/header_full.jpg' %}">
 {% block content %}
 {% if request.user.is_authenticated %}
   <h4>
