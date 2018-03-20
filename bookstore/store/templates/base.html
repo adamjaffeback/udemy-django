@@ -2,9 +2,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>{{ page|title }}</title>
+  <title>{% block title %}Welcome to Mystery Books!{% endblock %}</title>
 </head>
 <body>
+{% block content %}
 {% if request.user.is_authenticated %}
   <h4>
     Welcome, {% if request.user.first_name %}
@@ -20,5 +21,6 @@
 {% endif %}
 
 Welcome to the mystery books store. There are {{ count }} books in stock. User location: {{ request.session.location }}.
+{% endblock %}
 </body>
 </html>
