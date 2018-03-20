@@ -7,7 +7,7 @@
       <div class="panel-title">Log In</div>
     </div>
     <div class="panel-body" style="padding-top: 30px;">
-      <div id="login-alert" class="alert alert-danger col-sm-12"></div>
+      <div style="display: none;" id="login-alert" class="alert alert-danger col-sm-12"></div>
       <form method="post" action='.' class="form-horizontal" role='form'>
         {% csrf_token %}
         <div class="input-group" style="margin-bottom: 25px;">
@@ -23,6 +23,11 @@
             <label for="remember">
               <input type="checkbox" id="login-remember" name="remember" value=1> Remember Me
             </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12 controls">
+            <input type="submit" id="btn-login" class="btn btn-success" value="Login">
           </div>
         </div>
         <div class="form-group" style="margin-bottom: 10px;">
