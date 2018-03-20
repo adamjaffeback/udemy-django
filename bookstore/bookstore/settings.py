@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'bootstrap3',
     'bootstrap_themes',
+    'compressor',
     'registration',
     'store',
 )
