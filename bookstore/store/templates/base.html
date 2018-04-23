@@ -67,11 +67,13 @@
         <div class="col-md-8 col-md-offset-2 col-sm-12 maincontent">
           <div style="text-align: center;"><h3>Welcome to our store!</h3></div>
           {% for book in books %}
+          <a href="{% url 'book_details' book.id %}">
           <div class="storefront_book_display">
             <img src="{% static 'base/img/empty_cover.jpg' %}" alt="">
             <span class="storefront_book_title">{{ book.title }}</span>
             <span class="storefront_book_author">{{ book.author }}</span>
           </div>
+          </a>
           {% endfor %}
         </div>
         {% endblock %}
