@@ -33,6 +33,7 @@ def add_to_cart(request, book_id):
     else:
       try:
         cart = Cart.objects.get(user=request.user, active=True)
+        cart.add_to_cart(book_id)
       except ObjectDoesNotExist:
         cart = Cart.objects.create(user=request.user)
         cart.save()
