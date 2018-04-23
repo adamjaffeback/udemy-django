@@ -252,3 +252,22 @@ img.bg {
     text-align: right;
     margin-top: 20px;
 }
+
+/* Storefront Styles */
+
+.storefront_book_display {
+  width: 200px;
+  display: inline-block;
+  text-align: center;
+}
+
+.storefront_book_title {
+  font-size: 14px;
+  display: block;
+  font-weight: bold;
+}
+
+.storefront_book_author {
+  font-size: 11px;
+  display: block;
+}
