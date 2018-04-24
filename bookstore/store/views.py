@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolves import reverse
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 import paypalrestsdk
 
