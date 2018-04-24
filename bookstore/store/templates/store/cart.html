@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
 {% load staticfiles %}
+{% load custom_filters %}
+
 
 {% block body %}
 <div class="col-md-8 col-md-offset-2 col-sm-12 maincontent">
@@ -23,6 +24,55 @@
       <h4>Total: $<span class="cart_value">{{total}}</span></h4>
       {% if cart %}
       <div><a href="{% url 'checkout' 'paypal' %}"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="PayPal"></a></div>
+      <div>
+        {% csrf_token %}
+        <a href="#">
+          <img src="{% static 'base/img/stripe.png' %}" alt="Stripe" id="customButton">
+
+          <script>
+            // CSRF setup
+            var csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+              return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+              beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                }
+              }
+            });
+            // Stripe Setup
+            var handler = StripeCheckout.configure({
+              key: 'pk_test_VouxTD8IjPs3h9c2sGKhmsTg',
+              token: function (token) {
+                var payload = {
+                  stripeToken: token.id,
+                  csrfmiddlewaretoken: csrftoken
+                };
+                $.post("{% url 'checkout' 'stripe' %}", payload, function (data) {
+                  window.location.replace(data['redirect_url'])
+                });
+              }
+            });
+            // User Selects Stripe
+            $('#customButton').on('click', function (ev) {
+              handler.open({
+                name: 'Mystery Books',
+                description: '{{ count }} book{{ count|pluralize }}',
+                currency: 'USD',
+                amount: '{{ total|to_cents}}'
+              });
+              ev.preventDefault();
+            });
+            // Stripe is done
+            $(window).on('popstate', function () {
+              handler.close();
+            })
+          </script>
+        </a>
+      </div>
       {% endif %}
     </div>
   </div>
