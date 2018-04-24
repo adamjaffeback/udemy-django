@@ -84,7 +84,7 @@ def checkout(request, processor):
     cart = Cart.objects.filter(user=request.user.id, active=True)
     orders = BookOrder.objects.filter(cart=cart)
     if processor == 'paypal':
-      redirect_url = checkout_paypal(cart, orders)
+      redirect_url = checkout_paypal(request, cart, orders)
       return redirect(redirect_url)
     else:
       return redirect('index')
@@ -114,7 +114,7 @@ def checkout_paypal(request, cart, orders):
 
     payment = paypalrestsdk.Payment({
       "intent": "sale",
-      payer: {
+      "payer": {
         "payment_method": "paypal"
       },
       "redirect_urls": {
@@ -138,7 +138,7 @@ def checkout_paypal(request, cart, orders):
       cart_instance.payment_id = payment.id
       cart_instance.save()
       for link in payment.links:
-        if link.METHOD == "REDIRECT":
+        if link.method == "REDIRECT":
           redirect_url = str(link.href)
           return redirect_url
     else:
@@ -174,16 +174,17 @@ def process_order(request, processor):
 
 def complete_order(request, processor):
   if request.user.is_authenticated():
-    cart = Cart.objects.get(user=request.user.ud, active=True)
+    cart = Cart.objects.get(user=request.user, active=True)
     if processor == 'paypal':
       payment = paypalrestsdk.Payment.find(cart.payment_id)
       if payment.execute({"payer_id": payment.payer.payer_info.payer_id}):
-        message = 'Success! Your order has been completed and is being processed. Payment ID: %s' % {payment.id}
+        print payment
+        message = 'Success! Your order has been completed and is being processed. Payment ID: %s' % payment.id
         cart.active = False
         cart.order_date = timezone.now()
         cart.save()
       else:
-        message = "There was a problem with the transaction. Error: %s" % {payment.error.message}
+        message = "There was a problem with the transaction. Error: %s" % payment.error.message
       context = {
         "message": message
       }
