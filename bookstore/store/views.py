@@ -210,6 +210,7 @@ def complete_order(request, processor):
       if payment.execute({"payer_id": payment.payer.payer_info.payer_id}):
         message = 'Success! Your order has been completed and is being processed. Payment ID: %s' % payment.id
         cart.active = False
+        cart.payment_type = 'PayPal'
         cart.order_date = timezone.now()
         cart.save()
       else:
@@ -220,6 +221,7 @@ def complete_order(request, processor):
       return render(request, 'store/order_complete.html', context)
     elif processor == 'stripe':
       cart.active = False
+      cart.payment_type = 'Stripe'
       cart.order_date = timezone.now()
       cart.save()
       message = 'Success! Your order has been completed and is being processed. Payment ID: %s' % cart.payment_id
