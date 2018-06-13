@@ -136,8 +136,8 @@ LOGIN_REDIRECT_URL = '/store/'
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_HOST_USER = "postmaster@sandboxa9610bc1664d4dfb85399df07bd29d9f.mailgun.org"
-EMAIL_HOST_PASSWORD = "6423ed5268f5e081f76ed96605b4dc0d-b6183ad4-20c9aa2d"
+EMAIL_HOST_USER = config.MAILGUN_EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = config.MAILGUN_EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "books@mysterbooks.com"
