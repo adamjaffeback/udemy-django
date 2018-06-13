@@ -106,3 +106,5 @@ ENV/
 
 # SQLite Databases
 *.sqlite3
+
+config.py
