@@ -23,6 +23,9 @@ class Book(models.Model):
   stock = models.IntegerField(default=0)
   cover_image = models.ImageField(upload_to=cover_upload_path, default='books/empty_cover.jpg')
 
+  def __unicode__(self):
+    return self.title
+
 class Review(models.Model):
   book = models.ForeignKey(Book)
   user = models.ForeignKey(User)
