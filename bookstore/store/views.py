@@ -6,6 +6,8 @@ from django.http import JsonResponse
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context
 from django.template.loader import render_to_string
+from django.contrib.gis.geoip import GeoIP
+import config
 
 import string, random
 
@@ -22,6 +24,7 @@ def store(request):
   books = Book.objects.all()
   context = {
     'books': books,
+    'GOOGLE_API_KEY': config.GOOGLE_API_KEY,
   }
 
   return render(request, 'base.html', context)
@@ -68,6 +71,10 @@ def book_details(request, book_id):
         context['form'] = form
 
   context['reviews'] = book.review_set.all()
+  geo_info = GeoIP().city(request.META.get('REMOTE_ADDR'))
+  if not geo_info:
+    geo_info = GeoIP().city('72.14.207.99')
+  context['geo_info'] = geo_info
   return render(request, 'store/detail.html', context)
 
 
