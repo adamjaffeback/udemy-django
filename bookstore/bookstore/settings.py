@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -142,8 +143,8 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "books@mysterbooks.com"
 
 # Social Auth - Facebook
-SOCIAL_AUTH_FACEBOOK_KEY = '208935703021097'
-SOCIAL_AUTH_FACEBOOK_SECRET = '0af2d67906ce54cc2a32549fd31b7637'
+SOCIAL_AUTH_FACEBOOK_KEY = config.FACEBOOK_APP_ID
+SOCIAL_AUTH_FACEBOOK_SECRET = config.FACEBOOK_APP_SECRET
 
 # GIS
 GEOIP_PATH = 'geo/'
