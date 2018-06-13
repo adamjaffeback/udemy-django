@@ -45,7 +45,7 @@
             });
             // Stripe Setup
             var handler = StripeCheckout.configure({
-              key: 'pk_test_VouxTD8IjPs3h9c2sGKhmsTg',
+              key: '{{STRIPE_TEST_PUBLISHABLE_KEY}}',
               token: function (token) {
                 var payload = {
                   stripeToken: token.id,

@@ -127,6 +127,7 @@ def cart(request):
       'cart': orders,
       'total': total,
       'count': count,
+      'STRIPE_TEST_PUBLISHABLE_KEY': config.STRIPE_TEST_PUBLISHABLE_KEY,
     }
     return render(request, 'store/cart.html', context)
   else:
@@ -208,7 +209,7 @@ def checkout_paypal(request, cart, orders):
     return redirect('index')
 
 def checkout_stripe(cart, orders, token):
-  stripe.api_key = 'sk_test_eHi5D4G4Q9oZHIqOvg62DwxO'
+  stripe.api_key = config.STRIPE_TEST_SECRET_KEY
   total = 0
   total = 0
   for order in orders:
