@@ -23,3 +23,11 @@ class StoreViewsTestCase(TestCase):
   def test_cart(self):
     resp = self.client.get('/store/cart/')
     self.assertEqual(resp.status_code, 302)
+
+  def test_book_detail(self):
+      resp = self.client.get('/store/book/1/')
+      self.assertEqual(resp.status_code, 200)
+      self.assertEqual(resp.context['book'].pk, 1)
+      self.assertEqual(resp.context['book'].title, 'My Life')
+      resp = self.client.get('/store/book/2/')
+      self.assertEqual(resp.status_code, 404)
