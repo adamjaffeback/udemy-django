@@ -16,7 +16,7 @@ oauthlib==2.0.6
 paypalrestsdk==1.10.0
 Pillow==2.9.0
 pycparser==2.18
-PyJWT==1.6.0
+PyJWT==2.4.0
 pyOpenSSL==17.5.0
 python-openid==2.2.5
 python-social-auth==0.2.7
